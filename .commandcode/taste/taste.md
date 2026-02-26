@@ -2,3 +2,18 @@
 
 [cmd]: https://commandcode.ai/
 
+A few people whose “systems taste” really shows in video‑creation products:
+• Andrew Mason (Descript) Founder/CEO of Descript. The core architectural move—“edit media like a doc”—isn’t just UX, it’s a deep systems choice: text transcript is the primary representation, and all audio/video operations become transformations of that document. That drives everything from collaborative editing (Google Docs‑style multiuser sessions) to AI features like Underlord, which can chain multiple editing actions as text commands. It’s one of the cleanest examples of picking the right primitive and building the entire stack around it.
+• Anastasis Germanidis (Runway, co‑founder & CTO) Architecting Runway’s Gen‑3/Gen‑4‑style “world model” video generators and turning them into an actual production toolchain rather than a raw model demo. He’s very explicit about:
+• treating video generation as world modeling
+• prioritizing data and tasks over chasing exotic architectures
+• continuously shipping new models/tools while keeping them usable in real workflows (storyboards, B‑roll, interactive experiments, API) The way Runway blends heavy GPU inference, timeline editing, and a reasonably simple product surface is a good example of tasteful constraint management.
+• Eric Lu (Kapwing co‑founder & former CTO) & the Kapwing team Kapwing is a pure web editor: browser UX on top of cloud processing and storage, with both layout‑style editing and linear timeline editing in the same system. That forced a very opinionated architecture around stateless jobs, background FFmpeg‑style processing, and shareable/collaborative projects. Eric in particular has steered that from the early “meme generator” into a general‑purpose online editor while keeping the surface dead simple. If you care about “Figma‑for‑video but in a browser and for normals,” their taste in tradeoffs is worth studying.
+• Julia Enthoven (Kapwing co‑founder & CEO) On the product side, Julia is the one who kept pushing “accessible from any device, no pro‑editor learning curve” as a hard constraint. That product taste feeds directly into systems decisions: aggressive simplification of concepts, fast default paths (repurposing, AI highlights, auto‑captions), and deep integration with other tools via APIs and partners like Sieve for lip‑sync / dubbing. It’s a good example of architecture being pulled into shape by a very crisp user model.
+• Fabrice Bellard (FFmpeg, infra layer) Not a “platform” person, but a huge amount of video‑creation infra is standing on his work. Bellard created FFmpeg, the multimedia framework behind a ton of video pipelines on the web and on desktop; it underpins transcoding, filtering, and compositing for countless apps. His style—small, fast, mechanically sympathetic code with clear abstractions and ruthless performance constraints—is basically the gold standard for the low‑level half of any serious video system.
+If you want to learn taste from them rather than just know names:
+• Study Descript’s model of “text as source of truth” and how that flows through collaboration, storage, and AI features.
+• Look at how Runway turns huge, slow video models into an interactive product + API with a tight shipping cadence.
+• Reverse‑engineer Kapwing’s constraints: browser‑first, consumer‑grade UX, but with cloud jobs and team collaboration in the background.
+• And when you’re thinking about your own pipelines (transcode, render, repurpose), read Bellard‑related writeups on FFmpeg and performance craftsmanship as a mental model for the “engine room.”
+If you tell me what slice of “video creation platform” you’re actually building (collab editor, repurposing, AI gen, etc.), a more targeted list of people/talks/papers is possible.

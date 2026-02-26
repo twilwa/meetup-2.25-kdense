@@ -1,0 +1,54 @@
+{
+  "clips": [
+    {
+      "filename": "intro_sakura_blossoms.mp4",
+      "prompt": "Cherry blossom petals drifting through morning light",
+      "model": "wan2.1",
+      "resolution": "720p",
+      "duration_seconds": 5.0,
+      "use": "intro",
+      "generated_date": "2026-02-25",
+      "fallback": true
+    },
+    {
+      "filename": "idle_zen_garden.mp4",
+      "prompt": "Peaceful zen garden with gently swaying bamboo",
+      "model": "wan2.1",
+      "resolution": "720p",
+      "duration_seconds": 10.0,
+      "use": "idle",
+      "generated_date": "2026-02-25",
+      "fallback": true
+    },
+    {
+      "filename": "transition_moon_rise.mp4",
+      "prompt": "Full moon rising over misty mountains",
+      "model": "wan2.1",
+      "resolution": "720p",
+      "duration_seconds": 3.0,
+      "use": "transition",
+      "generated_date": "2026-02-25",
+      "fallback": false
+    },
+    {
+      "filename": "transition_stars_swirl.mp4",
+      "prompt": "Starfield swirling into a cosmic vortex",
+      "model": "wan2.1",
+      "resolution": "720p",
+      "duration_seconds": 3.0,
+      "use": "transition",
+      "generated_date": "2026-02-25",
+      "fallback": false
+    },
+    {
+      "filename": "outro_sunset_silhouette.mp4",
+      "prompt": "Silhouette of a lone figure watching sunset over ocean",
+      "model": "wan2.1",
+      "resolution": "720p",
+      "duration_seconds": 5.0,
+      "use": "outro",
+      "generated_date": "2026-02-25",
+      "fallback": false
+    }
+  ]
+}

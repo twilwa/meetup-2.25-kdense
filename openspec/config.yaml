@@ -1,20 +1,31 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+context: |
+  Project: Anime Studio on Stream
+  Tech stack: Python 3.11+, Modal (serverless GPU), Wan 2.1 (video generation),
+  twitchio (Twitch bot), obsws-python (OBS WebSocket), FastAPI
+  Domain: Real-time anime video generation for live streaming
+  Agents: Multi-agent parallel execution using Claude Code, Codex, and subagents
+  Conventions: k-dense-ai Modal skill patterns, OpenSpec spec-driven workflow,
+  TDD with pytest, pre-rendered burst + live composite architecture
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+  Key constraint: SeedDance 2.0 API unavailable (closed source, delayed indefinitely).
+  Primary generation model is Wan 2.1 (open-source, self-hosted on Modal).
+
+rules:
+  proposal:
+    - Keep proposals focused on a single workstream
+    - Include explicit dependencies on other workstreams
+    - Reference research findings from docs/ where relevant
+  specs:
+    - Use WHEN/THEN/AND scenario format
+    - Include failure scenarios, not just happy path
+    - Specs must be testable — no vague requirements
+  design:
+    - Include Goals and Non-Goals sections
+    - Reference k-dense-ai Modal skill patterns where applicable
+    - Include ASCII architecture diagrams for complex flows
+  tasks:
+    - Break into chunks of max 2 hours each
+    - Include verification tasks at the end of every change
+    - Mark manual (human) tasks explicitly

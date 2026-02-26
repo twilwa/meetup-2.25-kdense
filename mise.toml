@@ -57,6 +57,76 @@ ln -sf "$py" "$PWD/.tools/bin/python"
 ln -sf "$py" "$PWD/.tools/bin/python3"
 '''
 
+[tasks.test]
+description = "Run full test suite with human-readable progress report"
+run = '''
+set -euo pipefail
+echo "═══════════════════════════════════════════════════════════"
+echo "  Anime Studio — Test Suite Report"
+echo "═══════════════════════════════════════════════════════════"
+echo ""
+
+# Run pytest, capture output and exit code
+OUTPUT=$(.venv/bin/python -m pytest tests/ -v --tb=line 2>&1) || true
+
+# Extract summary line (e.g. "37 failed, 22 passed, 7 errors in 0.49s")
+SUMMARY=$(echo "$OUTPUT" | grep -E "^(FAILED|PASSED|ERROR|=)" | tail -1)
+
+# Count by status — anchor to pytest verbose lines ending with status
+PASSED=$(echo "$OUTPUT" | grep -cE " PASSED\s*\[" || true)
+FAILED=$(echo "$OUTPUT" | grep -cE " FAILED\s*\[" || true)
+ERRORS=$(echo "$OUTPUT" | grep -cE " ERROR\s*\[" || true)
+TOTAL=$((PASSED + FAILED + ERRORS))
+
+echo "  Totals: $TOTAL tests | $PASSED passed | $FAILED failed | $ERRORS errors"
+echo ""
+
+# Show by module
+for MODULE in schemas modal_endpoint benchmark commands queue obs_controller hero_catalog; do
+  MOD_PASS=$(echo "$OUTPUT" | grep "test_${MODULE}" | grep -cE " PASSED\s*\[" || true)
+  MOD_FAIL=$(echo "$OUTPUT" | grep "test_${MODULE}" | grep -cE " FAILED\s*\[" || true)
+  MOD_ERR=$(echo "$OUTPUT" | grep "test_${MODULE}" | grep -cE " ERROR\s*\[" || true)
+  MOD_TOTAL=$((MOD_PASS + MOD_FAIL + MOD_ERR))
+  if [ "$MOD_TOTAL" -eq 0 ]; then continue; fi
+
+  if [ "$MOD_FAIL" -eq 0 ] && [ "$MOD_ERR" -eq 0 ]; then
+    ICON="✅"
+  elif [ "$MOD_PASS" -eq 0 ]; then
+    ICON="🔴"
+  else
+    ICON="🟡"
+  fi
+  printf "  %s %-22s  %2d/%2d passed" "$ICON" "$MODULE" "$MOD_PASS" "$MOD_TOTAL"
+  if [ "$MOD_FAIL" -gt 0 ]; then printf "  (%d failed)" "$MOD_FAIL"; fi
+  if [ "$MOD_ERR" -gt 0 ]; then printf "  (%d errors)" "$MOD_ERR"; fi
+  echo ""
+done
+
+echo ""
+echo "───────────────────────────────────────────────────────────"
+
+# Print failures grouped by module
+if [ "$FAILED" -gt 0 ] || [ "$ERRORS" -gt 0 ]; then
+  echo "  Failing tests:"
+  echo ""
+  echo "$OUTPUT" | grep -E "^(FAILED|ERROR) " | sed 's/^/    /'
+  echo ""
+  echo "───────────────────────────────────────────────────────────"
+fi
+
+# TDD progress bar
+if [ "$TOTAL" -gt 0 ]; then
+  PCT=$((PASSED * 100 / TOTAL))
+  BAR_LEN=40
+  FILLED=$((PCT * BAR_LEN / 100))
+  EMPTY=$((BAR_LEN - FILLED))
+  BAR=$(printf '%0.s█' $(seq 1 $FILLED 2>/dev/null) || true)
+  SPACE=$(printf '%0.s░' $(seq 1 $EMPTY 2>/dev/null) || true)
+  echo "  TDD Progress: [${BAR}${SPACE}] ${PCT}% green"
+fi
+echo ""
+'''
+
 [tasks.check]
 description = "Run Trunk checks"
 run = "trunk check --all"

@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bd create:*)",
+      "Bash(bd config:*)",
+      "Bash(bd stats:*)",
+      "Bash(bd init:*)",
+      "Bash(cd /Users/anon/Projects/tribe/meetups/meetup-2.25-kdense/.beads/dolt && dolt sql -q \"SELECT * FROM config\" 2>&1)",
+      "Bash(bd dep:*)",
+      "Bash(bd ready:*)",
+      "Bash(bd update:*)",
+      "Bash(which python3 && python3 --version && which uv && uv --version 2>&1)",
+      "Bash(python:*)",
+      "Bash(which pytest:*)",
+      "Bash(pip install:*)",
+      "Bash(/Users/anon/Projects/tribe/meetups/meetup-2.25-kdense/.venv/bin/pip install:*)",
+      "Bash(/Users/anon/Projects/tribe/meetups/meetup-2.25-kdense/.venv/bin/python:*)",
+      "Bash(uv pip:*)",
+      "Bash(PYTHONPATH=. python:*)",
+      "Bash(which:*)",
+      "Bash(mise ls:*)",
+      "Bash(python3.11:*)",
+      "Bash(pytest:*)",
+      "Bash(/Users/anon/.local/share/mise/installs/python/3.11.14/bin/python:*)",
+      "Bash(head:*)",
+      "Bash(rm -rf .venv && uv venv --python 3.14 .venv 2>&1)",
+      "Bash(tail:*)",
+      "Bash(source .venv/bin/activate && python -m pytest tests/ -v --tb=short 2>&1)",
+      "Bash(bd close:*)"
+    ]
+  }
+}

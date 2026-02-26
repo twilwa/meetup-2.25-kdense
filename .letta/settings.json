@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m pytest tests/ -v --tb=short 2>&1 | head -100)",
+      "Bash(.venv/bin/python -m pytest tests/ -v --tb=short 2>&1 | head -120)",
+      "Edit(src/bot/**)",
+      "Edit(src/modal/**)",
+      "Edit(src/obs/**)",
+      "Bash(ls:*)",
+      "Bash(.venv/bin/python -m pytest tests/ -v --tb=short 2>&1 | head -100)",
+      "Bash(.venv/bin/python -m pytest tests/ -v --tb=short 2>&1 | tail -30)",
+      "Bash(.venv/bin/python -m pytest tests/ -v --tb=short 2>&1 | tail -20)",
+      "Bash(mise run test 2>&1)"
+    ]
+  }
+}
